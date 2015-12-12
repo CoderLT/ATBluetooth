@@ -1,0 +1,7 @@
+platform :ios, '7.0'
+
+pod 'ATNavigationController'
+pod 'BabyBluetooth'
+pod 'SVProgressHUD'
+pod 'UMengAnalytics'
+pod 'Aspects'
