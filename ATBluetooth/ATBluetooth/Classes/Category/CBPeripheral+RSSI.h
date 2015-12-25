@@ -10,4 +10,6 @@
 
 @interface CBPeripheral (RSSI)
 @property (nonatomic, assign) NSNumber *exRSSI;
+@property (nonatomic, strong) NSDictionary *exAdvertisementData;
+
 @end

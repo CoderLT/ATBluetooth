@@ -7,22 +7,42 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		55155DEB1C1D54ED00BC519A /* WcmmbpOpen.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = 55155DE61C1D54ED00BC519A /* WcmmbpOpen.pbobjc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		55155DEC1C1D54ED00BC519A /* WCMmbpOpen.proto in Resources */ = {isa = PBXBuildFile; fileRef = 55155DE71C1D54ED00BC519A /* WCMmbpOpen.proto */; };
+		55155DED1C1D54ED00BC519A /* Wcprotobuf.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = 55155DE91C1D54ED00BC519A /* Wcprotobuf.pbobjc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		55155DEE1C1D54ED00BC519A /* WCProtobuf.proto in Resources */ = {isa = PBXBuildFile; fileRef = 55155DEA1C1D54ED00BC519A /* WCProtobuf.proto */; };
+		558C0B491C2D367E000E5024 /* GATT_Specifications.plist in Resources */ = {isa = PBXBuildFile; fileRef = 558C0B481C2D367E000E5024 /* GATT_Specifications.plist */; };
+		558C0B4C1C2D36B0000E5024 /* ATGATTTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 558C0B4B1C2D36B0000E5024 /* ATGATTTool.m */; };
+		558C0B4F1C2D3DD2000E5024 /* ATSubTitleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 558C0B4E1C2D3DD2000E5024 /* ATSubTitleCell.m */; };
+		558C0B521C2D4A3E000E5024 /* ATSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 558C0B511C2D4A3E000E5024 /* ATSettingController.m */; };
+		55BBBF641C28F631005E6E8A /* ATTextInputController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55BBBF631C28F631005E6E8A /* ATTextInputController.m */; };
+		55BBBF671C2905AF005E6E8A /* ATBTData.m in Sources */ = {isa = PBXBuildFile; fileRef = 55BBBF661C2905AF005E6E8A /* ATBTData.m */; };
+		55BBBF6C1C291AE2005E6E8A /* UIView+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 55BBBF691C291AE2005E6E8A /* UIView+Common.m */; };
+		55BBBF6D1C291AE2005E6E8A /* UIViewController+Util.m in Sources */ = {isa = PBXBuildFile; fileRef = 55BBBF6B1C291AE2005E6E8A /* UIViewController+Util.m */; };
+		55BBBF701C291B07005E6E8A /* ATActionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 55BBBF6F1C291B07005E6E8A /* ATActionCell.m */; };
+		55BBBF731C291B12005E6E8A /* ATLogCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 55BBBF721C291B12005E6E8A /* ATLogCell.m */; };
+		55BBBF791C291DBC005E6E8A /* ATPropertyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 55BBBF781C291DBC005E6E8A /* ATPropertyModel.m */; };
 		55C4FE5A1BFD7E010097CF73 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C4FE591BFD7E010097CF73 /* main.m */; };
 		55C4FE631BFD7E010097CF73 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55C4FE611BFD7E010097CF73 /* Main.storyboard */; };
 		55C4FE651BFD7E010097CF73 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55C4FE641BFD7E010097CF73 /* Assets.xcassets */; };
 		55C4FE681BFD7E010097CF73 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55C4FE661BFD7E010097CF73 /* LaunchScreen.storyboard */; };
 		55C4FE731BFD7E010097CF73 /* ATBluetoothTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C4FE721BFD7E010097CF73 /* ATBluetoothTests.m */; };
 		55C4FE7E1BFD7E010097CF73 /* ATBluetoothUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C4FE7D1BFD7E010097CF73 /* ATBluetoothUITests.m */; };
+		55CC4B461C2AAD9300291418 /* ATLogController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55CC4B451C2AAD9300291418 /* ATLogController.m */; };
+		55CC4B491C2AD20600291418 /* ATBlueoothTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 55CC4B481C2AD20600291418 /* ATBlueoothTool.m */; };
+		55E3B1341C29621F00472D0D /* DOKConfigurationHex.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E3B1281C29621F00472D0D /* DOKConfigurationHex.m */; };
+		55E3B1351C29621F00472D0D /* DOKConfigurationNumericNormal.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E3B12A1C29621F00472D0D /* DOKConfigurationNumericNormal.m */; };
+		55E3B1361C29621F00472D0D /* DOKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E3B12C1C29621F00472D0D /* DOKeyboard.m */; };
+		55E3B1371C29621F00472D0D /* DOKeyboardHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E3B12E1C29621F00472D0D /* DOKeyboardHelpers.m */; };
+		55E3B1381C29621F00472D0D /* DOKeyItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E3B1301C29621F00472D0D /* DOKeyItem.m */; };
+		55E3B1391C29621F00472D0D /* delete.png in Resources */ = {isa = PBXBuildFile; fileRef = 55E3B1321C29621F00472D0D /* delete.png */; };
+		55E3B13A1C29621F00472D0D /* delete@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 55E3B1331C29621F00472D0D /* delete@2x.png */; };
 		55E3B9C51BFDCFA500606F0C /* ATHomeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E3B9BC1BFDCFA500606F0C /* ATHomeController.m */; };
 		55E3B9C61BFDCFA500606F0C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E3B9C01BFDCFA500606F0C /* AppDelegate.m */; };
 		55E3B9CB1BFDF8CA00606F0C /* CBPeripheral+RSSI.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E3B9CA1BFDF8CA00606F0C /* CBPeripheral+RSSI.m */; };
 		55E3B9CE1BFE089500606F0C /* ATPeripheralController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E3B9CD1BFE089500606F0C /* ATPeripheralController.m */; };
 		55E3B9D11BFE1F8E00606F0C /* ATCharacteristicController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E3B9D01BFE1F8E00606F0C /* ATCharacteristicController.m */; };
 		55E3B9D71BFEEA7C00606F0C /* NSDate+Util.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E3B9D61BFEEA7C00606F0C /* NSDate+Util.m */; };
-		55E3B9DC1BFEFAE100606F0C /* ATTextBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E3B9D91BFEFAE100606F0C /* ATTextBaseView.m */; };
-		55E3B9DD1BFEFAE100606F0C /* ATTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E3B9DB1BFEFAE100606F0C /* ATTextView.m */; };
-		55E3B9E21BFEFB5600606F0C /* UIView+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E3B9DF1BFEFB5600606F0C /* UIView+Common.m */; };
-		55E3B9E31BFEFB5600606F0C /* UIViewController+Util.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E3B9E11BFEFB5600606F0C /* UIViewController+Util.m */; };
 		55E3B9E61BFF08D800606F0C /* ATBluetoothNavController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E3B9E51BFF08D800606F0C /* ATBluetoothNavController.m */; };
 		55E3B9EC1BFF1A2D00606F0C /* UIViewController+statistics.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E3B9EB1BFF1A2D00606F0C /* UIViewController+statistics.m */; };
 		82734097324B753C665CD84F /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D2EF27316BFCED0E2F05760A /* libPods.a */; };
@@ -46,6 +66,33 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		55155DE51C1D54ED00BC519A /* WcmmbpOpen.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WcmmbpOpen.pbobjc.h; sourceTree = "<group>"; };
+		55155DE61C1D54ED00BC519A /* WcmmbpOpen.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WcmmbpOpen.pbobjc.m; sourceTree = "<group>"; };
+		55155DE71C1D54ED00BC519A /* WCMmbpOpen.proto */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = WCMmbpOpen.proto; sourceTree = "<group>"; };
+		55155DE81C1D54ED00BC519A /* Wcprotobuf.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Wcprotobuf.pbobjc.h; sourceTree = "<group>"; };
+		55155DE91C1D54ED00BC519A /* Wcprotobuf.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Wcprotobuf.pbobjc.m; sourceTree = "<group>"; };
+		55155DEA1C1D54ED00BC519A /* WCProtobuf.proto */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = WCProtobuf.proto; sourceTree = "<group>"; };
+		558C0B481C2D367E000E5024 /* GATT_Specifications.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = GATT_Specifications.plist; sourceTree = "<group>"; };
+		558C0B4A1C2D36B0000E5024 /* ATGATTTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATGATTTool.h; sourceTree = "<group>"; };
+		558C0B4B1C2D36B0000E5024 /* ATGATTTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATGATTTool.m; sourceTree = "<group>"; };
+		558C0B4D1C2D3DD2000E5024 /* ATSubTitleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATSubTitleCell.h; sourceTree = "<group>"; };
+		558C0B4E1C2D3DD2000E5024 /* ATSubTitleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATSubTitleCell.m; sourceTree = "<group>"; };
+		558C0B501C2D4A3E000E5024 /* ATSettingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATSettingController.h; sourceTree = "<group>"; };
+		558C0B511C2D4A3E000E5024 /* ATSettingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATSettingController.m; sourceTree = "<group>"; };
+		55BBBF621C28F631005E6E8A /* ATTextInputController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATTextInputController.h; sourceTree = "<group>"; };
+		55BBBF631C28F631005E6E8A /* ATTextInputController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATTextInputController.m; sourceTree = "<group>"; };
+		55BBBF651C2905AF005E6E8A /* ATBTData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATBTData.h; sourceTree = "<group>"; };
+		55BBBF661C2905AF005E6E8A /* ATBTData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATBTData.m; sourceTree = "<group>"; };
+		55BBBF681C291AE2005E6E8A /* UIView+Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Common.h"; sourceTree = "<group>"; };
+		55BBBF691C291AE2005E6E8A /* UIView+Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Common.m"; sourceTree = "<group>"; };
+		55BBBF6A1C291AE2005E6E8A /* UIViewController+Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Util.h"; sourceTree = "<group>"; };
+		55BBBF6B1C291AE2005E6E8A /* UIViewController+Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Util.m"; sourceTree = "<group>"; };
+		55BBBF6E1C291B07005E6E8A /* ATActionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATActionCell.h; sourceTree = "<group>"; };
+		55BBBF6F1C291B07005E6E8A /* ATActionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATActionCell.m; sourceTree = "<group>"; };
+		55BBBF711C291B12005E6E8A /* ATLogCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATLogCell.h; sourceTree = "<group>"; };
+		55BBBF721C291B12005E6E8A /* ATLogCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATLogCell.m; sourceTree = "<group>"; };
+		55BBBF771C291DBC005E6E8A /* ATPropertyModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATPropertyModel.h; sourceTree = "<group>"; };
+		55BBBF781C291DBC005E6E8A /* ATPropertyModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATPropertyModel.m; sourceTree = "<group>"; };
 		55C4FE551BFD7E010097CF73 /* ATBluetooth.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ATBluetooth.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		55C4FE591BFD7E010097CF73 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		55C4FE621BFD7E010097CF73 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -58,6 +105,22 @@
 		55C4FE791BFD7E010097CF73 /* ATBluetoothUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ATBluetoothUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		55C4FE7D1BFD7E010097CF73 /* ATBluetoothUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ATBluetoothUITests.m; sourceTree = "<group>"; };
 		55C4FE7F1BFD7E010097CF73 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		55CC4B441C2AAD9300291418 /* ATLogController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATLogController.h; sourceTree = "<group>"; };
+		55CC4B451C2AAD9300291418 /* ATLogController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATLogController.m; sourceTree = "<group>"; };
+		55CC4B471C2AD20600291418 /* ATBlueoothTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATBlueoothTool.h; sourceTree = "<group>"; };
+		55CC4B481C2AD20600291418 /* ATBlueoothTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATBlueoothTool.m; sourceTree = "<group>"; };
+		55E3B1271C29621F00472D0D /* DOKConfigurationHex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DOKConfigurationHex.h; sourceTree = "<group>"; };
+		55E3B1281C29621F00472D0D /* DOKConfigurationHex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DOKConfigurationHex.m; sourceTree = "<group>"; };
+		55E3B1291C29621F00472D0D /* DOKConfigurationNumericNormal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DOKConfigurationNumericNormal.h; sourceTree = "<group>"; };
+		55E3B12A1C29621F00472D0D /* DOKConfigurationNumericNormal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DOKConfigurationNumericNormal.m; sourceTree = "<group>"; };
+		55E3B12B1C29621F00472D0D /* DOKeyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DOKeyboard.h; sourceTree = "<group>"; };
+		55E3B12C1C29621F00472D0D /* DOKeyboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DOKeyboard.m; sourceTree = "<group>"; };
+		55E3B12D1C29621F00472D0D /* DOKeyboardHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DOKeyboardHelpers.h; sourceTree = "<group>"; };
+		55E3B12E1C29621F00472D0D /* DOKeyboardHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DOKeyboardHelpers.m; sourceTree = "<group>"; };
+		55E3B12F1C29621F00472D0D /* DOKeyItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DOKeyItem.h; sourceTree = "<group>"; };
+		55E3B1301C29621F00472D0D /* DOKeyItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DOKeyItem.m; sourceTree = "<group>"; };
+		55E3B1321C29621F00472D0D /* delete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = delete.png; sourceTree = "<group>"; };
+		55E3B1331C29621F00472D0D /* delete@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "delete@2x.png"; sourceTree = "<group>"; };
 		55E3B9BB1BFDCFA500606F0C /* ATHomeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATHomeController.h; sourceTree = "<group>"; };
 		55E3B9BC1BFDCFA500606F0C /* ATHomeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATHomeController.m; sourceTree = "<group>"; };
 		55E3B9BF1BFDCFA500606F0C /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -70,14 +133,6 @@
 		55E3B9D01BFE1F8E00606F0C /* ATCharacteristicController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATCharacteristicController.m; sourceTree = "<group>"; };
 		55E3B9D51BFEEA7C00606F0C /* NSDate+Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Util.h"; sourceTree = "<group>"; };
 		55E3B9D61BFEEA7C00606F0C /* NSDate+Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Util.m"; sourceTree = "<group>"; };
-		55E3B9D81BFEFAE100606F0C /* ATTextBaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATTextBaseView.h; sourceTree = "<group>"; };
-		55E3B9D91BFEFAE100606F0C /* ATTextBaseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATTextBaseView.m; sourceTree = "<group>"; };
-		55E3B9DA1BFEFAE100606F0C /* ATTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATTextView.h; sourceTree = "<group>"; };
-		55E3B9DB1BFEFAE100606F0C /* ATTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATTextView.m; sourceTree = "<group>"; };
-		55E3B9DE1BFEFB5600606F0C /* UIView+Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Common.h"; sourceTree = "<group>"; };
-		55E3B9DF1BFEFB5600606F0C /* UIView+Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Common.m"; sourceTree = "<group>"; };
-		55E3B9E01BFEFB5600606F0C /* UIViewController+Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Util.h"; sourceTree = "<group>"; };
-		55E3B9E11BFEFB5600606F0C /* UIViewController+Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Util.m"; sourceTree = "<group>"; };
 		55E3B9E41BFF08D800606F0C /* ATBluetoothNavController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATBluetoothNavController.h; sourceTree = "<group>"; };
 		55E3B9E51BFF08D800606F0C /* ATBluetoothNavController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATBluetoothNavController.m; sourceTree = "<group>"; };
 		55E3B9EA1BFF1A2D00606F0C /* UIViewController+statistics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+statistics.h"; sourceTree = "<group>"; };
@@ -121,6 +176,39 @@
 				BAB2F4814592B51F2AD10BBC /* Pods.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		55155DE31C1D54ED00BC519A /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				558C0B471C2D367E000E5024 /* GATTSpecifications */,
+				55E3B1261C29621F00472D0D /* DOHexKeyboard */,
+				55155DE41C1D54ED00BC519A /* WeChatProtobuf */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
+		55155DE41C1D54ED00BC519A /* WeChatProtobuf */ = {
+			isa = PBXGroup;
+			children = (
+				55155DE51C1D54ED00BC519A /* WcmmbpOpen.pbobjc.h */,
+				55155DE61C1D54ED00BC519A /* WcmmbpOpen.pbobjc.m */,
+				55155DE71C1D54ED00BC519A /* WCMmbpOpen.proto */,
+				55155DE81C1D54ED00BC519A /* Wcprotobuf.pbobjc.h */,
+				55155DE91C1D54ED00BC519A /* Wcprotobuf.pbobjc.m */,
+				55155DEA1C1D54ED00BC519A /* WCProtobuf.proto */,
+			);
+			path = WeChatProtobuf;
+			sourceTree = "<group>";
+		};
+		558C0B471C2D367E000E5024 /* GATTSpecifications */ = {
+			isa = PBXGroup;
+			children = (
+				558C0B481C2D367E000E5024 /* GATT_Specifications.plist */,
+				558C0B4A1C2D36B0000E5024 /* ATGATTTool.h */,
+				558C0B4B1C2D36B0000E5024 /* ATGATTTool.m */,
+			);
+			path = GATTSpecifications;
 			sourceTree = "<group>";
 		};
 		55C4FE4C1BFD7E010097CF73 = {
@@ -184,9 +272,37 @@
 			path = ATBluetoothUITests;
 			sourceTree = "<group>";
 		};
+		55E3B1261C29621F00472D0D /* DOHexKeyboard */ = {
+			isa = PBXGroup;
+			children = (
+				55E3B1271C29621F00472D0D /* DOKConfigurationHex.h */,
+				55E3B1281C29621F00472D0D /* DOKConfigurationHex.m */,
+				55E3B1291C29621F00472D0D /* DOKConfigurationNumericNormal.h */,
+				55E3B12A1C29621F00472D0D /* DOKConfigurationNumericNormal.m */,
+				55E3B12B1C29621F00472D0D /* DOKeyboard.h */,
+				55E3B12C1C29621F00472D0D /* DOKeyboard.m */,
+				55E3B12D1C29621F00472D0D /* DOKeyboardHelpers.h */,
+				55E3B12E1C29621F00472D0D /* DOKeyboardHelpers.m */,
+				55E3B12F1C29621F00472D0D /* DOKeyItem.h */,
+				55E3B1301C29621F00472D0D /* DOKeyItem.m */,
+				55E3B1311C29621F00472D0D /* images */,
+			);
+			path = DOHexKeyboard;
+			sourceTree = "<group>";
+		};
+		55E3B1311C29621F00472D0D /* images */ = {
+			isa = PBXGroup;
+			children = (
+				55E3B1321C29621F00472D0D /* delete.png */,
+				55E3B1331C29621F00472D0D /* delete@2x.png */,
+			);
+			path = images;
+			sourceTree = "<group>";
+		};
 		55E3B9B91BFDCFA500606F0C /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				55155DE31C1D54ED00BC519A /* Utility */,
 				55E3B9C81BFDF8AD00606F0C /* Category */,
 				55E3B9BA1BFDCFA500606F0C /* Controller */,
 				55E3B9BD1BFDCFA500606F0C /* Model */,
@@ -208,6 +324,12 @@
 				55E3B9CD1BFE089500606F0C /* ATPeripheralController.m */,
 				55E3B9CF1BFE1F8E00606F0C /* ATCharacteristicController.h */,
 				55E3B9D01BFE1F8E00606F0C /* ATCharacteristicController.m */,
+				55BBBF621C28F631005E6E8A /* ATTextInputController.h */,
+				55BBBF631C28F631005E6E8A /* ATTextInputController.m */,
+				55CC4B441C2AAD9300291418 /* ATLogController.h */,
+				55CC4B451C2AAD9300291418 /* ATLogController.m */,
+				558C0B501C2D4A3E000E5024 /* ATSettingController.h */,
+				558C0B511C2D4A3E000E5024 /* ATSettingController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -215,6 +337,10 @@
 		55E3B9BD1BFDCFA500606F0C /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				55BBBF651C2905AF005E6E8A /* ATBTData.h */,
+				55BBBF661C2905AF005E6E8A /* ATBTData.m */,
+				55BBBF771C291DBC005E6E8A /* ATPropertyModel.h */,
+				55BBBF781C291DBC005E6E8A /* ATPropertyModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -232,6 +358,8 @@
 		55E3B9C11BFDCFA500606F0C /* Tool */ = {
 			isa = PBXGroup;
 			children = (
+				55CC4B471C2AD20600291418 /* ATBlueoothTool.h */,
+				55CC4B481C2AD20600291418 /* ATBlueoothTool.m */,
 			);
 			path = Tool;
 			sourceTree = "<group>";
@@ -239,14 +367,12 @@
 		55E3B9C41BFDCFA500606F0C /* View */ = {
 			isa = PBXGroup;
 			children = (
-				55E3B9DE1BFEFB5600606F0C /* UIView+Common.h */,
-				55E3B9DF1BFEFB5600606F0C /* UIView+Common.m */,
-				55E3B9E01BFEFB5600606F0C /* UIViewController+Util.h */,
-				55E3B9E11BFEFB5600606F0C /* UIViewController+Util.m */,
-				55E3B9D81BFEFAE100606F0C /* ATTextBaseView.h */,
-				55E3B9D91BFEFAE100606F0C /* ATTextBaseView.m */,
-				55E3B9DA1BFEFAE100606F0C /* ATTextView.h */,
-				55E3B9DB1BFEFAE100606F0C /* ATTextView.m */,
+				55BBBF6E1C291B07005E6E8A /* ATActionCell.h */,
+				55BBBF6F1C291B07005E6E8A /* ATActionCell.m */,
+				55BBBF711C291B12005E6E8A /* ATLogCell.h */,
+				55BBBF721C291B12005E6E8A /* ATLogCell.m */,
+				558C0B4D1C2D3DD2000E5024 /* ATSubTitleCell.h */,
+				558C0B4E1C2D3DD2000E5024 /* ATSubTitleCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -254,6 +380,10 @@
 		55E3B9C81BFDF8AD00606F0C /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				55BBBF681C291AE2005E6E8A /* UIView+Common.h */,
+				55BBBF691C291AE2005E6E8A /* UIView+Common.m */,
+				55BBBF6A1C291AE2005E6E8A /* UIViewController+Util.h */,
+				55BBBF6B1C291AE2005E6E8A /* UIViewController+Util.m */,
 				55E3B9D51BFEEA7C00606F0C /* NSDate+Util.h */,
 				55E3B9D61BFEEA7C00606F0C /* NSDate+Util.m */,
 				55E3B9C91BFDF8CA00606F0C /* CBPeripheral+RSSI.h */,
@@ -379,8 +509,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55E3B1391C29621F00472D0D /* delete.png in Resources */,
 				55C4FE681BFD7E010097CF73 /* LaunchScreen.storyboard in Resources */,
+				558C0B491C2D367E000E5024 /* GATT_Specifications.plist in Resources */,
 				55C4FE651BFD7E010097CF73 /* Assets.xcassets in Resources */,
+				55155DEC1C1D54ED00BC519A /* WCMmbpOpen.proto in Resources */,
+				55E3B13A1C29621F00472D0D /* delete@2x.png in Resources */,
+				55155DEE1C1D54ED00BC519A /* WCProtobuf.proto in Resources */,
 				55C4FE631BFD7E010097CF73 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -454,19 +589,34 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				55E3B9E31BFEFB5600606F0C /* UIViewController+Util.m in Sources */,
+				55CC4B491C2AD20600291418 /* ATBlueoothTool.m in Sources */,
+				55E3B1351C29621F00472D0D /* DOKConfigurationNumericNormal.m in Sources */,
+				55BBBF641C28F631005E6E8A /* ATTextInputController.m in Sources */,
 				55E3B9D71BFEEA7C00606F0C /* NSDate+Util.m in Sources */,
+				55BBBF671C2905AF005E6E8A /* ATBTData.m in Sources */,
+				55155DEB1C1D54ED00BC519A /* WcmmbpOpen.pbobjc.m in Sources */,
 				55C4FE5A1BFD7E010097CF73 /* main.m in Sources */,
 				55E3B9C51BFDCFA500606F0C /* ATHomeController.m in Sources */,
+				55BBBF6C1C291AE2005E6E8A /* UIView+Common.m in Sources */,
 				55E3B9CE1BFE089500606F0C /* ATPeripheralController.m in Sources */,
+				55E3B1381C29621F00472D0D /* DOKeyItem.m in Sources */,
+				558C0B521C2D4A3E000E5024 /* ATSettingController.m in Sources */,
 				55E3B9C61BFDCFA500606F0C /* AppDelegate.m in Sources */,
 				55E3B9CB1BFDF8CA00606F0C /* CBPeripheral+RSSI.m in Sources */,
 				55E3B9E61BFF08D800606F0C /* ATBluetoothNavController.m in Sources */,
-				55E3B9DC1BFEFAE100606F0C /* ATTextBaseView.m in Sources */,
-				55E3B9E21BFEFB5600606F0C /* UIView+Common.m in Sources */,
-				55E3B9DD1BFEFAE100606F0C /* ATTextView.m in Sources */,
+				55E3B1361C29621F00472D0D /* DOKeyboard.m in Sources */,
+				55E3B1371C29621F00472D0D /* DOKeyboardHelpers.m in Sources */,
+				55E3B1341C29621F00472D0D /* DOKConfigurationHex.m in Sources */,
 				55E3B9EC1BFF1A2D00606F0C /* UIViewController+statistics.m in Sources */,
+				558C0B4C1C2D36B0000E5024 /* ATGATTTool.m in Sources */,
+				55BBBF701C291B07005E6E8A /* ATActionCell.m in Sources */,
+				55BBBF791C291DBC005E6E8A /* ATPropertyModel.m in Sources */,
+				55155DED1C1D54ED00BC519A /* Wcprotobuf.pbobjc.m in Sources */,
+				55BBBF731C291B12005E6E8A /* ATLogCell.m in Sources */,
+				558C0B4F1C2D3DD2000E5024 /* ATSubTitleCell.m in Sources */,
+				55BBBF6D1C291AE2005E6E8A /* UIViewController+Util.m in Sources */,
 				55E3B9D11BFE1F8E00606F0C /* ATCharacteristicController.m in Sources */,
+				55CC4B461C2AAD9300291418 /* ATLogController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

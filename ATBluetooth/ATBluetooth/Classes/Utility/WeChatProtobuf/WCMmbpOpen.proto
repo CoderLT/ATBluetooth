@@ -1,0 +1,44 @@
+// See README.txt for information and build instructions.
+//
+// Note: START and END tags are used in comments to define sections used in
+// tutorials.  They are not part of the syntax for Protocol Buffers.
+//
+// To get an in-depth walkthrough of this file and the related examples, see:
+// https://developers.google.com/protocol-buffers/docs/tutorials// [START declaration]
+syntax = "proto2";
+// package tutorial;
+// [END declaration]// [START java_declaration]
+// option java_package = "com.example.tutorial";
+// option java_outer_classname = "AddressBookProtos";
+// [END java_declaration]// [START csharp_declaration]
+// option csharp_namespace = "Google.Protobuf.Examples.AddressBook";
+// [END csharp_declaration]// [START messages]
+// proto version: 1.0.4
+// 12 微信公众平台proto文件
+// type=1，手环类
+package mmbp_open;
+message MmBpOpen_BaseResponse{
+    optional int32 errcode = 1;
+    optional string errmsg = 2;
+}
+message MmBpOpen_WristbandRequest {
+    message MmBpOpen_StepDataItem
+    {
+        optional uint32 Step = 1;
+        optional uint32 Timestamp = 2;
+        optional uint32 TimeStampRtcYear = 3;
+        optional uint32 TimeStampRtcMonth = 4;
+        optional uint32 TimeStampRtcDay = 5;
+        optional uint32 TimeStampRtcHour = 6;
+        optional uint32 TimeStampRtcMinute = 7;
+        optional uint32 TimeStampRtcSecond = 8;
+    }
+    repeated MmBpOpen_StepDataItem StepData = 1;
+    optional bytes ExtData = 2;
+}
+message MmBpOpen_WristBandResponse{
+    optional MmBpOpen_BaseResponse BaseResp = 1;
+}
+message MmBpOpen_WristBandPush{
+}
+// [END messages]

@@ -10,14 +10,17 @@
 #import <CoreBluetooth/CoreBluetooth.h>
 #import <BabyBluetooth/BabyBluetooth.h>
 #import <SVProgressHUD.h>
+#import "ATBTData.h"
 
-@interface ATCharacteristicController : UIViewController
+@interface ATCharacteristicController : UITableViewController
 
 @property (nonatomic, strong) BabyBluetooth *bluetooth;
 @property (nonatomic, strong) CBPeripheral *peripheral;
 @property (nonatomic, strong) CBCharacteristic *characteristic;
+@property (nonatomic, strong) NSMutableArray<ATBTData *> *logs;
 
 + (instancetype)vcWithBluetooth:(BabyBluetooth *)bluetooth
                      peripheral:(CBPeripheral *)peripheral
-                 characteristic:(CBCharacteristic *)characteristic;
+                 characteristic:(CBCharacteristic *)characteristic
+                           logs:(NSMutableArray<ATBTData *> *)logs;
 @end

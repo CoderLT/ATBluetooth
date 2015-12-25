@@ -1,0 +1,169 @@
+// See README.txt for information and build instructions.
+//
+// Note: START and END tags are used in comments to define sections used in
+// tutorials.  They are not part of the syntax for Protocol Buffers.
+//
+// To get an in-depth walkthrough of this file and the related examples, see:
+// https://developers.google.com/protocol-buffers/docs/tutorials// [START declaration]
+syntax = "proto2";
+// package tutorial;
+// [END declaration]// [START java_declaration]
+// option java_package = "com.example.tutorial";
+// option java_outer_classname = "AddressBookProtos";
+// [END java_declaration]// [START csharp_declaration]
+// option csharp_namespace = "Google.Protobuf.Examples.AddressBook";
+// [END csharp_declaration]// [START messages]
+// proto version: 1.0.4
+package MmBp;
+enum MmBp_EmCmdId
+{
+    ECI_none = 0;
+    // req： 蓝牙设备 -&gt; 微信/厂商服务器
+    ECI_req_auth = 10001; // 登录
+    ECI_req_sendData = 10002; // 蓝牙设备发送数据给微信或厂商
+    ECI_req_init = 10003; // 初始化
+    // resp：微信/厂商服务器 -&gt; 蓝牙设备
+    ECI_resp_auth = 20001;
+    ECI_resp_sendData = 20002;
+    ECI_resp_init = 20003;
+    // push：微信/厂商服务器 -&gt; 蓝牙设备
+    ECI_push_recvData = 30001; // 微信或厂商发送数据给蓝牙设备
+    ECI_push_switchView = 30002; // 进入/退出界面
+    ECI_push_switchBackgroud = 30003; // 切换后台
+    ECI_err_decode = 29999; // 解密失败的错误码。注意：这不是cmdid。为节省固定包头大小，这种特殊的错误码放在包头的cmdid字段。
+}
+enum MmBp_EmErrorCode
+{
+    EEC_system = -1; // 通用的错误
+    EEC_needAuth = -2; // 设备未登录
+    EEC_sessionTimeout = -3; // session超时，需要重新登录
+    EEC_decode = -4; // proto解码失败
+    EEC_deviceIsBlock = -5; // 设备出现异常，导致被微信临时性禁止登录
+    EEC_serviceUnAvalibleInBackground = -6; // ios处于后台模式，无法正常服务
+    EEC_deviceProtoVersionNeedUpdate = -7; // 设备的proto版本过老，需要更新
+    EEC_phoneProtoVersionNeedUpdate = -8; // 微信客户端的proto版本过老，需要更新
+    EEC_maxReqInQueue = -9; // 设备发送了多个请求，并且没有收到回包。微信客户端请求队列拥塞。
+    EEC_userExitWxAccount = -10; // 用户退出微信帐号。
+}
+message MmBp_BaseRequest {
+}
+message MmBp_BaseResponse {
+    required int32 ErrCode = 1;
+    optional string ErrMsg = 2;
+}
+message MmBp_BasePush {
+}
+// req, resp ========================================
+enum MmBp_EmAuthMethod
+{
+    EAM_md5 = 1; // 设备通过Md5DeviceTypeAndDeviceId，来通过微信app的认证。1. 如果是用aes加密，注意设置AesSign有值。 2. 如果是没有加密，注意设置AesSign为空或者长度为零。
+    EAM_macNoEncrypt = 2; // 设备通过mac地址字段，且没有加密，来通过微信app的认证。
+}
+// 登录 ---------------------------------------------
+message MmBp_AuthRequest {
+    required MmBp_BaseRequest BaseRequest = 1;
+    optional bytes Md5DeviceTypeAndDeviceId = 2; // deviceType加deviceId的md5，16字节的二进制数据
+    required int32 ProtoVersion = 3; // 设备支持的本proto文件的版本号，第一个字节表示最小版本，第二个字节表示小版本，第三字节表示大版本。版本号为1.0.0的话，应该填：0x010000；1.2.3的话，填成0x010203。
+    required int32 AuthProto = 4; // 填1
+    required MmBp_EmAuthMethod AuthMethod = 5; // 验证和加密的方法，见EmAuthMethod
+    optional bytes AesSign = 6; // 具体生成方法见文档
+    optional bytes MacAddress = 7; // mac地址，6位。当设备没有烧deviceId的时候，可使用该mac地址字段来通过微信app的认证
+    optional string TimeZone = 10; // 废弃
+    optional string Language = 11; // 废弃
+    optional string DeviceName = 12; // 废弃
+}
+message MmBp_AuthResponse {
+    required MmBp_BaseResponse BaseResponse = 1;
+    required bytes AesSessionKey = 2;
+}
+// 初始化 --------------------------------------------
+enum MmBp_EmInitRespFieldFilter {
+    EIRFF_userNickName = 0x1;
+    EIRFF_platformType = 0x2;
+    EIRFF_model = 0x4;
+    EIRFF_os = 0x8;
+    EIRFF_time = 0x10;
+    EIRFF_timeZone = 0x20;
+    EIRFF_timeString = 0x40;
+}
+// 微信连接上设备时，处于什么情景
+enum MmBp_EmInitScence {
+    EIS_deviceChat = 1; // 聊天
+    EIS_autoSync = 2; // 自动同步
+}
+message MmBp_InitRequest {
+    required MmBp_BaseRequest BaseRequest = 1;
+    optional bytes RespFieldFilter = 2; // 当一个bit被设置就表示要resp的某个字段：见EmInitRespFieldFilter。
+    optional bytes Challenge = 3; // 设备用来验证手机是否安全。为设备随机生成的四个字节。
+}
+enum MmBp_EmPlatformType {
+    EPT_ios = 1;
+    EPT_andriod = 2;
+    EPT_wp = 3;
+    EPT_s60v3 = 4;
+    EPT_s60v5 = 5;
+    EPT_s40 = 6;
+    EPT_bb = 7;
+}
+message MmBp_InitResponse {
+    required MmBp_BaseResponse BaseResponse = 1;
+    required uint32 UserIdHigh = 2; // 微信用户Id高32位
+    required uint32 UserIdLow = 3; // 微信用户Id低32位
+    optional uint32 ChalleangeAnswer = 4; // 手机回复设备的挑战。为设备生成的字节的crc32。
+    optional MmBp_EmInitScence InitScence = 5; // 微信连接上设备时，处于什么情景。如果该字段为空，表示处于EIS_deviceChat下。
+    optional uint32 AutoSyncMaxDurationSecond = 6; // 自动同步最多持续多长，微信就会关闭连接。0xffffffff表示无限长。
+    optional string UserNickName = 11; // 微信用户昵称
+    optional MmBp_EmPlatformType PlatformType = 12; // 手机平台
+    optional string Model = 13; // 手机硬件型号
+    optional string Os = 14; // 手机os版本
+    optional int32 Time = 15; // 手机当前时间
+    optional int32 TimeZone = 16; // 手机当前时区
+    optional string TimeString = 17; // 手机当前时间，格式如201402281005285，具体字段意义为2014（年）02（2月）28（28号）10（点）05（分钟）28（秒）5（星期五）。星期一为1，星期天为7。
+}
+// 设备发送数据给微信或厂商 ----------------------------
+// 设备数据类型
+enum MmBp_EmDeviceDataType {
+    EDDT_manufatureSvr = 0; // 厂商自定义数据
+    EDDT_wxWristBand = 1; // 微信公众平台手环数据，手环上报计步数据
+    EDDT_wxDeviceHtmlChatView = 10001; // 微信客户端设备html5会话界面数据
+}
+message MmBp_SendDataRequest {
+    required MmBp_BaseRequest BaseRequest = 1;
+    required bytes Data = 2;
+    optional MmBp_EmDeviceDataType Type = 3; // 数据类型(如厂商自定义数据，或公众平台规定的手环数据，或微信客户端设备html5会话界面数据等）。不填，或者等于0的时候，表示设备发送厂商自定义数据到厂商服务器。
+}
+message MmBp_SendDataResponse {
+    required MmBp_BaseResponse BaseResponse = 1;
+    optional bytes Data = 2;
+}
+// push ===================================================
+// 微信或厂商发送数据给蓝牙设备 ---------------------------
+message MmBp_RecvDataPush {
+    required MmBp_BasePush BasePush = 1;
+    required bytes Data = 2;
+    optional MmBp_EmDeviceDataType Type = 3; // 数据类型(如厂商自定义数据，或公众平台规定的手环数据，或微信客户端设备html5会话界面数据等）。不填，或者等于0的时候，表示设备收到厂商自定义数据。
+}
+// 微信客户端进入退出界面的通知 ---------------------------
+enum MmBp_EmSwitchViewOp{
+    ESVO_enter = 1;
+    ESVO_exit = 2;
+}
+enum MmBp_EmViewId{
+    EVI_deviceChatView = 1; // 微信客户端设备号会话界面
+    EVI_deviceChatHtmlView = 2; // 微信客户端设备号Html5会话界面。注意：只有当H5界面主动和设备连接上之后，才会发送push。
+}
+message MmBp_SwitchViewPush{
+    required MmBp_BasePush BasePush = 1;
+    required MmBp_EmSwitchViewOp SwitchViewOp = 2; // 进入或者退出View
+    required MmBp_EmViewId ViewId = 3; // view的id
+}
+enum MmBp_EmSwitchBackgroundOp{
+    ESBO_enterBackground = 1; // 进入后台
+    ESBO_enterForground = 2; // 进入前台
+    ESBO_sleep = 3; // 后台休眠
+}
+// 微信客户端进入退出后台的通知 ------------------------------
+message MmBp_SwitchBackgroudPush{
+    required MmBp_BasePush BasePush = 1;
+    required MmBp_EmSwitchBackgroundOp SwitchBackgroundOp = 2;
+}

@@ -1,7 +1,12 @@
-platform :ios, '7.0'
+platform :ios, '7.1'
 
 pod 'ATNavigationController'
 pod 'BabyBluetooth'
 pod 'SVProgressHUD'
 pod 'UMengAnalytics'
 pod 'Aspects'
+pod 'Protobuf', '~> 3.0.0-alpha-4.1'
+pod 'YYKit'
+pod 'Masonry'
+#pod 'UITableView+FDTemplateLayoutCell'
+#pod 'KVOController'

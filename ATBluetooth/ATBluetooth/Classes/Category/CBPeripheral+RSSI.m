@@ -16,4 +16,11 @@
 - (void)setExRSSI:(NSNumber *)exRSSI {
     objc_setAssociatedObject(self, @selector(exRSSI), exRSSI, OBJC_ASSOCIATION_ASSIGN);
 }
+
+- (NSNumber *)exAdvertisementData {
+    return objc_getAssociatedObject(self, _cmd);
+}
+- (void)setExAdvertisementData:(NSDictionary *)exAdvertisementData {
+    objc_setAssociatedObject(self, @selector(exAdvertisementData), exAdvertisementData, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
 @end
