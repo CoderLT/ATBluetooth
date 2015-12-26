@@ -65,6 +65,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"历史记录";
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(share)];
     
     [self.view addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -74,6 +75,20 @@
 }
 
 #pragma mark - actions
+- (void)share {
+    NSMutableString *string = [NSMutableString string];
+    for (int i = 0; i < self.logs.count; i++) {
+        ATBTData *log = self.logs[i];
+        [string appendFormat:@"%@ %@\r\n", [log.date stringWithFormat:@"mm:ss.SSS:"], log.text];
+    }
+    UIActivityViewController *activityViewController =
+    [[UIActivityViewController alloc] initWithActivityItems:@[string]
+                                      applicationActivities:nil];
+    [self.navigationController presentViewController:activityViewController
+                                            animated:YES
+                                          completion:^{
+                                          }];
+}
 - (void)updateData {
     NSDictionary *logAttrDic = @{NSFontAttributeName : [UIFont systemFontOfSize:10],
                                  NSForegroundColorAttributeName : UIColorHex(0x404040)};

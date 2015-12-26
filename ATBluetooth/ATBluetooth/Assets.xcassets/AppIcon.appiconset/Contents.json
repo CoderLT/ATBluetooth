@@ -3,42 +3,45 @@
     {
       "size" : "29x29",
       "idiom" : "iphone",
-      "filename" : "bluetoothIcon58.png",
+      "filename" : "Logo58.png",
       "scale" : "2x"
     },
     {
       "size" : "29x29",
       "idiom" : "iphone",
-      "filename" : "bluetoothIcon87.png",
+      "filename" : "Logo87.png",
       "scale" : "3x"
     },
     {
       "size" : "40x40",
       "idiom" : "iphone",
-      "filename" : "bluetoothIcon80.png",
+      "filename" : "Logo80.png",
       "scale" : "2x"
     },
     {
       "size" : "40x40",
       "idiom" : "iphone",
-      "filename" : "bluetoothIcon120.png",
+      "filename" : "Logo120-1.png",
       "scale" : "3x"
     },
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "bluetoothIcon120-1.png",
+      "filename" : "Logo120.png",
       "scale" : "2x"
     },
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "bluetoothIcon180.png",
+      "filename" : "Logo180.png",
       "scale" : "3x"
     }
   ],
   "info" : {
     "version" : 1,
     "author" : "xcode"
+  },
+  "properties" : {
+    "pre-rendered" : true
   }
 }

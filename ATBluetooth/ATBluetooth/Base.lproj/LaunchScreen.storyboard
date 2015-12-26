@@ -3,7 +3,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -18,17 +17,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bluetoothIconLaunch" translatesAutoresizingMaskIntoConstraints="NO" id="0b6-7g-W1w">
-                                <rect key="frame" x="250" y="222" width="100" height="155"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LaunchIcon" translatesAutoresizingMaskIntoConstraints="NO" id="0b6-7g-W1w">
+                                <rect key="frame" x="200" y="172" width="200" height="256"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="155" id="E4z-VK-s0U"/>
-                                    <constraint firstAttribute="width" secondItem="0b6-7g-W1w" secondAttribute="height" multiplier="154:239" id="WY6-gI-VuW"/>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="cQB-lV-rSq"/>
-                                    <constraint firstAttribute="width" constant="100" id="xbd-Qy-g7G"/>
+                                    <constraint firstAttribute="width" constant="200" id="xbd-Qy-g7G"/>
                                 </constraints>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" red="0.20392156862745098" green="0.28627450980392155" blue="0.36862745098039218" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.2196078431372549" green="0.41176470588235292" blue="0.69411764705882351" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="0b6-7g-W1w" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="1wh-cz-Q4D"/>
                             <constraint firstItem="0b6-7g-W1w" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="IU4-YG-hl4"/>
@@ -41,6 +37,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="bluetoothIconLaunch" width="308" height="478"/>
+        <image name="LaunchIcon" width="256" height="256"/>
     </resources>
 </document>

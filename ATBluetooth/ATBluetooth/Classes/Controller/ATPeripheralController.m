@@ -154,7 +154,8 @@
     return 0.01;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return [[self tableView:tableView cellForRowAtIndexPath:indexPath] systemLayoutSizeFittingSize:CGSizeZero].height + 16;
+    UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
+    return [cell.textLabel sizeThatFits:CGSizeZero].height + [cell.detailTextLabel sizeThatFits:CGSizeZero].height + 20;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ATPeripheralController"];
@@ -163,9 +164,14 @@
     cell.textLabel.text = [NSString stringWithFormat:@"%@%@%@", desc ?: @"", desc?@" : ":@"", characteristic.UUID.UUIDString];
     
     NSString *title = [NSString stringWithFormat:@"属性: %@", [ATBlueoothTool properties:characteristic.properties separator:@"|"]];
-    if (characteristic.value.length > 1) {
-        NSString *value = [NSString stringWithUTF8String:characteristic.value.bytes];
-        title = [title stringByAppendingFormat:@", %@", value ?: characteristic.value];
+    if (characteristic.value.length > 0) {
+        if (characteristic.value.length == 1) {
+            title = [title stringByAppendingFormat:@", 0x%02X", ((Byte *)characteristic.value.bytes)[0]];
+        }
+        else {
+            NSString *value = [NSString stringWithUTF8String:characteristic.value.bytes];
+            title = [title stringByAppendingFormat:@", %@", value ?: characteristic.value];
+        }
     }
     
     for (CBDescriptor *d in characteristic.descriptors) {
