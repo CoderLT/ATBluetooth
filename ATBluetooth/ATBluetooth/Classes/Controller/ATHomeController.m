@@ -46,9 +46,9 @@
     [self.bluetooth setBlockOnDiscoverToPeripheralsAtChannel:CurrentChannel block:^(CBCentralManager *central, CBPeripheral *peripheral, NSDictionary *advertisementData, NSNumber *RSSI) {
         [SVProgressHUD dismiss];
         __strong typeof(weakSelf) strongSelf = weakSelf;
-        ATLog(@"搜索到了设备:%@ - %@db", peripheral.name, RSSI);
         peripheral.exRSSI = RSSI;
         if(![strongSelf.peripherals containsObject:peripheral]) {
+            ATLog(@"搜索到了设备:%@ - %@db", peripheral.name, RSSI);
             peripheral.exAdvertisementData = advertisementData;
             [strongSelf.peripherals addObject:peripheral];
             [strongSelf.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:strongSelf.peripherals.count-1 inSection:0]]
