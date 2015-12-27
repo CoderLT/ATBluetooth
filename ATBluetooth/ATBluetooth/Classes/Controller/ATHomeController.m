@@ -38,6 +38,9 @@
             [SVProgressHUD showInfoWithStatus:@"请打开蓝牙, 来扫描周围设备..."];
         }
     }];
+    //扫描选项->CBCentralManagerScanOptionAllowDuplicatesKey:忽略同一个Peripheral端的多个发现事件被聚合成一个发现事件
+    NSDictionary *scanForPeripheralsWithOptions = @{CBCentralManagerScanOptionAllowDuplicatesKey:@YES};
+    [self.bluetooth setBabyOptionsAtChannel:CurrentChannel scanForPeripheralsWithOptions:scanForPeripheralsWithOptions connectPeripheralWithOptions:nil scanForPeripheralsWithServices:nil discoverWithServices:nil discoverWithCharacteristics:nil];
     
     //设置扫描到设备的委托
     [self.bluetooth setBlockOnDiscoverToPeripheralsAtChannel:CurrentChannel block:^(CBCentralManager *central, CBPeripheral *peripheral, NSDictionary *advertisementData, NSNumber *RSSI) {
@@ -52,9 +55,15 @@
                                         withRowAnimation:UITableViewRowAnimationAutomatic];
         }
         else {
+            static NSTimeInterval lastTime = 0;
+            NSTimeInterval currentTime = [NSDate date].timeIntervalSinceReferenceDate;
+            if (currentTime - lastTime < 1) {
+                return;
+            }
+            lastTime = currentTime;
             NSUInteger index = [strongSelf.peripherals indexOfObject:peripheral];
             [strongSelf.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]]
-                                        withRowAnimation:UITableViewRowAnimationAutomatic];
+                                        withRowAnimation:UITableViewRowAnimationNone];
         }
     }];
 }

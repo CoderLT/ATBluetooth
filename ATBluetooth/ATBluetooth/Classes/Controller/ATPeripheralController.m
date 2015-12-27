@@ -57,8 +57,8 @@
     BabyRhythm *rhythm = [[BabyRhythm alloc]init];
     // 设置发现设备的Services的委托
     [self.bluetooth setBlockOnDiscoverServicesAtChannel:channelOnPeropheralView block:^(CBPeripheral *peripheral, NSError *error) {
+        ATLog(@"发现服务%@", [peripheral.services valueForKeyPath:@"UUID.UUIDString"]);
         __strong typeof(weakSelf) strongSelf = weakSelf;
-        
         NSMutableAttributedString *title = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"[%@db] %@", peripheral.exRSSI, peripheral.name]];
         [title appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"\r\nUUID: %@\r\n%@", peripheral.identifier.UUIDString, peripheral.exAdvertisementData ?:@""]
                                                                       attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:12],
@@ -69,22 +69,22 @@
     }];
     // 设置beats break委托
     [rhythm setBlockOnBeatsBreak:^(BabyRhythm *bry) {
-        ATLog(@"setBlockOnBeatsBreak call");
+        ATLog(@"心跳中断的委托");
     }];
     // 设置beats over委托
     [rhythm setBlockOnBeatsOver:^(BabyRhythm *bry) {
-        ATLog(@"setBlockOnBeatsOver call");
+        ATLog(@"心跳结束的委托");
     }];
     
     // 设置发现设service的Characteristics的委托
     [self.bluetooth setBlockOnDiscoverCharacteristicsAtChannel:channelOnPeropheralView block:^(CBPeripheral *peripheral, CBService *service, NSError *error) {
-        ATLog(@"==== service name:%@",service.UUID);
+        ATLog(@"发现特征%@: %@", service.UUID, [service.characteristics valueForKeyPath:@"UUID.UUIDString"]);
         __strong typeof(weakSelf) strongSelf = weakSelf;
         [strongSelf.tableView reloadData];
     }];
     // 设置读取characteristics的委托
     [self.bluetooth setBlockOnReadValueForCharacteristicAtChannel:channelOnPeropheralView block:^(CBPeripheral *peripheral, CBCharacteristic *characteristics, NSError *error) {
-        ATLog(@"==== characteristic name:%@ value is:%@", characteristics.UUID, characteristics.value);
+        ATLog(@"读取特征值%@: %@", characteristics.UUID, characteristics.value);
         if (characteristics.value.length <= 0) {
             return;
         }
@@ -93,20 +93,20 @@
     }];
     // 设置发现characteristics的descriptors的委托
     [self.bluetooth setBlockOnDiscoverDescriptorsForCharacteristicAtChannel:channelOnPeropheralView block:^(CBPeripheral *peripheral, CBCharacteristic *characteristic, NSError *error) {
-        ATLog(@"==== characteristic name:%@ descriptors is:%@",characteristic, characteristic.descriptors);
+        ATLog(@"发现描述%@:%@", characteristic.UUID, [characteristic.descriptors valueForKeyPath:@"UUID.UUIDString"]);
         __strong typeof(weakSelf) strongSelf = weakSelf;
         [strongSelf.tableView reloadData];
     }];
     // 设置读取Descriptor的委托
     [self.bluetooth setBlockOnReadValueForDescriptorsAtChannel:channelOnPeropheralView block:^(CBPeripheral *peripheral, CBDescriptor *descriptor, NSError *error) {
-        ATLog(@"==== descriptor :%@", descriptor);
+        ATLog(@"读取描述值%@:%@", descriptor.UUID, descriptor.value);
         __strong typeof(weakSelf) strongSelf = weakSelf;
         [strongSelf.tableView reloadData];
     }];
     
     // 读取rssi的委托
     [self.bluetooth setBlockOnDidReadRSSIAtChannel:channelOnPeropheralView block:^(NSNumber *RSSI, NSError *error) {
-        ATLog(@"setBlockOnDidReadRSSI %@", RSSI);
+        ATLog(@"读取rssi %@", RSSI);
         __strong typeof(weakSelf) strongSelf = weakSelf;
         strongSelf.peripheral.exRSSI = RSSI;
         [strongSelf.tableView reloadData];
@@ -123,6 +123,7 @@
         [self.bluetooth cancelAllPeripheralsConnection];
         self.bluetooth.having(self.peripheral).and.channel(channelOnPeropheralView).then.connectToPeripherals().discoverServices().discoverCharacteristics().readValueForCharacteristic().discoverDescriptorsForCharacteristic().readValueForDescriptors().begin();
     }
+    [self.tableView reloadData];
 }
 - (IBAction)didClickinfo:(id)sender {
     if (self.tableView.tableHeaderView.height == 68) {
