@@ -11,10 +11,10 @@
 		55155DEC1C1D54ED00BC519A /* WCMmbpOpen.proto in Resources */ = {isa = PBXBuildFile; fileRef = 55155DE71C1D54ED00BC519A /* WCMmbpOpen.proto */; };
 		55155DED1C1D54ED00BC519A /* Wcprotobuf.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = 55155DE91C1D54ED00BC519A /* Wcprotobuf.pbobjc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		55155DEE1C1D54ED00BC519A /* WCProtobuf.proto in Resources */ = {isa = PBXBuildFile; fileRef = 55155DEA1C1D54ED00BC519A /* WCProtobuf.proto */; };
-		558C0B491C2D367E000E5024 /* GATT_Specifications.plist in Resources */ = {isa = PBXBuildFile; fileRef = 558C0B481C2D367E000E5024 /* GATT_Specifications.plist */; };
-		558C0B4C1C2D36B0000E5024 /* ATGATTTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 558C0B4B1C2D36B0000E5024 /* ATGATTTool.m */; };
 		558C0B4F1C2D3DD2000E5024 /* ATSubTitleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 558C0B4E1C2D3DD2000E5024 /* ATSubTitleCell.m */; };
 		558C0B521C2D4A3E000E5024 /* ATSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 558C0B511C2D4A3E000E5024 /* ATSettingController.m */; };
+		558C0B571C301ED0000E5024 /* ATGATTTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 558C0B551C301ED0000E5024 /* ATGATTTool.m */; };
+		558C0B581C301ED0000E5024 /* GATT_Specifications.plist in Resources */ = {isa = PBXBuildFile; fileRef = 558C0B561C301ED0000E5024 /* GATT_Specifications.plist */; };
 		55BBBF641C28F631005E6E8A /* ATTextInputController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55BBBF631C28F631005E6E8A /* ATTextInputController.m */; };
 		55BBBF671C2905AF005E6E8A /* ATBTData.m in Sources */ = {isa = PBXBuildFile; fileRef = 55BBBF661C2905AF005E6E8A /* ATBTData.m */; };
 		55BBBF6C1C291AE2005E6E8A /* UIView+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 55BBBF691C291AE2005E6E8A /* UIView+Common.m */; };
@@ -72,13 +72,13 @@
 		55155DE81C1D54ED00BC519A /* Wcprotobuf.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Wcprotobuf.pbobjc.h; sourceTree = "<group>"; };
 		55155DE91C1D54ED00BC519A /* Wcprotobuf.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Wcprotobuf.pbobjc.m; sourceTree = "<group>"; };
 		55155DEA1C1D54ED00BC519A /* WCProtobuf.proto */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = WCProtobuf.proto; sourceTree = "<group>"; };
-		558C0B481C2D367E000E5024 /* GATT_Specifications.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = GATT_Specifications.plist; sourceTree = "<group>"; };
-		558C0B4A1C2D36B0000E5024 /* ATGATTTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATGATTTool.h; sourceTree = "<group>"; };
-		558C0B4B1C2D36B0000E5024 /* ATGATTTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATGATTTool.m; sourceTree = "<group>"; };
 		558C0B4D1C2D3DD2000E5024 /* ATSubTitleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATSubTitleCell.h; sourceTree = "<group>"; };
 		558C0B4E1C2D3DD2000E5024 /* ATSubTitleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATSubTitleCell.m; sourceTree = "<group>"; };
 		558C0B501C2D4A3E000E5024 /* ATSettingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATSettingController.h; sourceTree = "<group>"; };
 		558C0B511C2D4A3E000E5024 /* ATSettingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATSettingController.m; sourceTree = "<group>"; };
+		558C0B541C301ED0000E5024 /* ATGATTTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATGATTTool.h; sourceTree = "<group>"; };
+		558C0B551C301ED0000E5024 /* ATGATTTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATGATTTool.m; sourceTree = "<group>"; };
+		558C0B561C301ED0000E5024 /* GATT_Specifications.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = GATT_Specifications.plist; sourceTree = "<group>"; };
 		55BBBF621C28F631005E6E8A /* ATTextInputController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATTextInputController.h; sourceTree = "<group>"; };
 		55BBBF631C28F631005E6E8A /* ATTextInputController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATTextInputController.m; sourceTree = "<group>"; };
 		55BBBF651C2905AF005E6E8A /* ATBTData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATBTData.h; sourceTree = "<group>"; };
@@ -181,7 +181,7 @@
 		55155DE31C1D54ED00BC519A /* Utility */ = {
 			isa = PBXGroup;
 			children = (
-				558C0B471C2D367E000E5024 /* GATTSpecifications */,
+				558C0B531C301ED0000E5024 /* GATTSpecifications */,
 				55E3B1261C29621F00472D0D /* DOHexKeyboard */,
 				55155DE41C1D54ED00BC519A /* WeChatProtobuf */,
 			);
@@ -201,12 +201,12 @@
 			path = WeChatProtobuf;
 			sourceTree = "<group>";
 		};
-		558C0B471C2D367E000E5024 /* GATTSpecifications */ = {
+		558C0B531C301ED0000E5024 /* GATTSpecifications */ = {
 			isa = PBXGroup;
 			children = (
-				558C0B481C2D367E000E5024 /* GATT_Specifications.plist */,
-				558C0B4A1C2D36B0000E5024 /* ATGATTTool.h */,
-				558C0B4B1C2D36B0000E5024 /* ATGATTTool.m */,
+				558C0B541C301ED0000E5024 /* ATGATTTool.h */,
+				558C0B551C301ED0000E5024 /* ATGATTTool.m */,
+				558C0B561C301ED0000E5024 /* GATT_Specifications.plist */,
 			);
 			path = GATTSpecifications;
 			sourceTree = "<group>";
@@ -511,11 +511,11 @@
 			files = (
 				55E3B1391C29621F00472D0D /* delete.png in Resources */,
 				55C4FE681BFD7E010097CF73 /* LaunchScreen.storyboard in Resources */,
-				558C0B491C2D367E000E5024 /* GATT_Specifications.plist in Resources */,
 				55C4FE651BFD7E010097CF73 /* Assets.xcassets in Resources */,
 				55155DEC1C1D54ED00BC519A /* WCMmbpOpen.proto in Resources */,
 				55E3B13A1C29621F00472D0D /* delete@2x.png in Resources */,
 				55155DEE1C1D54ED00BC519A /* WCProtobuf.proto in Resources */,
+				558C0B581C301ED0000E5024 /* GATT_Specifications.plist in Resources */,
 				55C4FE631BFD7E010097CF73 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -595,6 +595,7 @@
 				55E3B9D71BFEEA7C00606F0C /* NSDate+Util.m in Sources */,
 				55BBBF671C2905AF005E6E8A /* ATBTData.m in Sources */,
 				55155DEB1C1D54ED00BC519A /* WcmmbpOpen.pbobjc.m in Sources */,
+				558C0B571C301ED0000E5024 /* ATGATTTool.m in Sources */,
 				55C4FE5A1BFD7E010097CF73 /* main.m in Sources */,
 				55E3B9C51BFDCFA500606F0C /* ATHomeController.m in Sources */,
 				55BBBF6C1C291AE2005E6E8A /* UIView+Common.m in Sources */,
@@ -608,7 +609,6 @@
 				55E3B1371C29621F00472D0D /* DOKeyboardHelpers.m in Sources */,
 				55E3B1341C29621F00472D0D /* DOKConfigurationHex.m in Sources */,
 				55E3B9EC1BFF1A2D00606F0C /* UIViewController+statistics.m in Sources */,
-				558C0B4C1C2D36B0000E5024 /* ATGATTTool.m in Sources */,
 				55BBBF701C291B07005E6E8A /* ATActionCell.m in Sources */,
 				55BBBF791C291DBC005E6E8A /* ATPropertyModel.m in Sources */,
 				55155DED1C1D54ED00BC519A /* Wcprotobuf.pbobjc.m in Sources */,

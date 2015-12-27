@@ -221,8 +221,8 @@
             title = [title stringByAppendingFormat:@"\r\n%@ : %@", d.UUID, d.value];
         }
     }
-    NSAttributedString *desc = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"UUID : %@\r\n%@",
-                                                                           self.characteristic.UUID.UUIDString, title]
+    NSAttributedString *desc = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@\r\n%@",
+                                                                           self.characteristic.UUID, title]
                                                                attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:12],
                                                                             NSForegroundColorAttributeName : [UIColor colorWithWhite:(0x87/255.0) alpha:1.0f]}];
     [header appendAttributedString:[[NSAttributedString alloc] initWithString:header.mutableString.length ? @"\r\n" : @""]];

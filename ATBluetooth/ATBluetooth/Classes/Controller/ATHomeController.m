@@ -29,11 +29,13 @@
 
     __weak typeof(self) weakSelf = self;
     [self.bluetooth setBlockOnCentralManagerDidUpdateStateAtChannel:CurrentChannel block:^(CBCentralManager *central) {
+        __strong typeof(weakSelf) strongSelf = weakSelf;
         if (central.state == CBCentralManagerStatePoweredOn) {
-            [SVProgressHUD showWithStatus:@"蓝牙打开成功，开始扫描设备"];
+            [SVProgressHUD showWithStatus:@"蓝牙打开成功"];
+            [strongSelf scanBluetooth:nil];
         }
         else {
-            [SVProgressHUD showInfoWithStatus:@"蓝牙打开失败"];
+            [SVProgressHUD showInfoWithStatus:@"请打开蓝牙, 来扫描周围设备..."];
         }
     }];
     
@@ -66,6 +68,7 @@
         [self.bluetooth cancelAllPeripheralsConnection];
         //设置委托后直接可以使用，无需等待CBCentralManagerStatePoweredOn状态。
         self.bluetooth.channel(CurrentChannel).scanForPeripherals().begin();
+        [SVProgressHUD showWithStatus:@"蓝牙打开成功, 开始扫描设备..."];
     });
 }
 

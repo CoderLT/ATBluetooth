@@ -31,9 +31,7 @@
 }
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    if (self.peripheral.state != CBPeripheralStateConnected) {
-        [self refresh];
-    }
+    [self refresh];
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -107,7 +105,7 @@
     }];
     
     // 读取rssi的委托
-    [self.bluetooth setBlockOnDidReadRSSI:^(NSNumber *RSSI, NSError *error) {
+    [self.bluetooth setBlockOnDidReadRSSIAtChannel:channelOnPeropheralView block:^(NSNumber *RSSI, NSError *error) {
         ATLog(@"setBlockOnDidReadRSSI %@", RSSI);
         __strong typeof(weakSelf) strongSelf = weakSelf;
         strongSelf.peripheral.exRSSI = RSSI;
@@ -119,10 +117,12 @@
 }
 #pragma mark - actions
 - (void)refresh {
-    [SVProgressHUD showWithStatus:[NSString stringWithFormat:@"设备：%@--连接中...", self.peripheral.name]];
-    [self.bluetooth cancelScan];
-    [self.bluetooth cancelAllPeripheralsConnection];
-    self.bluetooth.having(self.peripheral).and.channel(channelOnPeropheralView).then.connectToPeripherals().discoverServices().discoverCharacteristics().readValueForCharacteristic().discoverDescriptorsForCharacteristic().readValueForDescriptors().begin();
+    if (self.peripheral.state != CBPeripheralStateConnected) {
+        [SVProgressHUD showWithStatus:[NSString stringWithFormat:@"设备：%@--连接中...", self.peripheral.name]];
+        [self.bluetooth cancelScan];
+        [self.bluetooth cancelAllPeripheralsConnection];
+        self.bluetooth.having(self.peripheral).and.channel(channelOnPeropheralView).then.connectToPeripherals().discoverServices().discoverCharacteristics().readValueForCharacteristic().discoverDescriptorsForCharacteristic().readValueForDescriptors().begin();
+    }
 }
 - (IBAction)didClickinfo:(id)sender {
     if (self.tableView.tableHeaderView.height == 68) {
