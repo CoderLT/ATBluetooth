@@ -31,7 +31,7 @@
 }
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    [self refresh];
+    [self refresh:NO];
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -41,20 +41,20 @@
     [self.bluetooth setBlockOnConnectedAtChannel:channelOnPeropheralView block:^(CBCentralManager *central, CBPeripheral *peripheral) {
         __strong typeof(weakSelf) strongSelf = weakSelf;
         [SVProgressHUD showInfoWithStatus:[NSString stringWithFormat:@"设备：%@--连接成功", peripheral.name]];
-        [NSObject cancelPreviousPerformRequestsWithTarget:strongSelf selector:@selector(refresh) object:nil];
+        [NSObject cancelPreviousPerformRequestsWithTarget:strongSelf];
     }];
     [self.bluetooth setBlockOnFailToConnectAtChannel:channelOnPeropheralView block:^(CBCentralManager *central, CBPeripheral *peripheral, NSError *error) {
         __strong typeof(weakSelf) strongSelf = weakSelf;
         [SVProgressHUD showInfoWithStatus:[NSString stringWithFormat:@"设备：%@--连接失败", peripheral.name]];
-        [strongSelf performSelector:@selector(refresh) withObject:nil afterDelay:1];
+        [strongSelf performSelector:@selector(refresh:) withObject:@(YES) afterDelay:1];
     }];
     [self.bluetooth setBlockOnDisconnectAtChannel:channelOnPeropheralView block:^(CBCentralManager *central, CBPeripheral *peripheral, NSError *error) {
         __strong typeof(weakSelf) strongSelf = weakSelf;
         [SVProgressHUD showInfoWithStatus:[NSString stringWithFormat:@"设备：%@--断开失败", peripheral.name]];
-        [strongSelf performSelector:@selector(refresh) withObject:nil afterDelay:1];
+        [strongSelf performSelector:@selector(refresh:) withObject:@(YES) afterDelay:1];
     }];
     
-    BabyRhythm *rhythm = [[BabyRhythm alloc]init];
+    BabyRhythm *rhythm = [[BabyRhythm alloc] init];
     // 设置发现设备的Services的委托
     [self.bluetooth setBlockOnDiscoverServicesAtChannel:channelOnPeropheralView block:^(CBPeripheral *peripheral, NSError *error) {
         ATLog(@"发现服务%@", [peripheral.services valueForKeyPath:@"UUID.UUIDString"]);
@@ -116,14 +116,19 @@
     [_bluetooth cancelAllPeripheralsConnection];
 }
 #pragma mark - actions
-- (void)refresh {
+- (void)refresh:(BOOL)reconnect {
     if (self.peripheral.state != CBPeripheralStateConnected) {
         [SVProgressHUD showWithStatus:[NSString stringWithFormat:@"设备：%@--连接中...", self.peripheral.name]];
         [self.bluetooth cancelScan];
         [self.bluetooth cancelAllPeripheralsConnection];
-        self.bluetooth.having(self.peripheral).and.channel(channelOnPeropheralView).then.connectToPeripherals().discoverServices().discoverCharacteristics().readValueForCharacteristic().discoverDescriptorsForCharacteristic().readValueForDescriptors().begin();
+        reconnect = YES;
     }
-    [self.tableView reloadData];
+    if (reconnect) {
+        self.bluetooth.having(self.peripheral).and.channel(channelOnPeropheralView).then.connectToPeripherals().discoverServices().discoverCharacteristics().readValueForCharacteristic().begin();
+    }
+    else {
+        [self.tableView reloadData];
+    }
 }
 - (IBAction)didClickinfo:(id)sender {
     if (self.tableView.tableHeaderView.height == 68) {
@@ -176,13 +181,17 @@
     }
     
     for (CBDescriptor *d in characteristic.descriptors) {
+        if (!d.value) {
+            continue;
+        }
         if ([d.UUID.UUIDString isEqualToString:CBUUIDCharacteristicUserDescriptionString]) {
-            cell.textLabel.text = [NSString stringWithFormat:@"%@ : %@", d.value, cell.textLabel.text];
+            NSString *userDesc = [NSString stringWithFormat:@"%@", d.value];
+            if (userDesc.length) {
+                cell.textLabel.text = [NSString stringWithFormat:@"%@ : %@", userDesc, cell.textLabel.text];
+            }
         }
         else {
-            if (d.value) {
-                title = [title stringByAppendingFormat:@"\r\n%@ : %@", d.UUID, d.value];
-            }
+            title = [title stringByAppendingFormat:@"\r\n%@ : %@", d.UUID, d.value];
         }
     }
 

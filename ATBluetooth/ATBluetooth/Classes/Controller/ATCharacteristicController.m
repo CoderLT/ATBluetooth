@@ -50,11 +50,10 @@
         __strong typeof(weakSelf) strongSelf = weakSelf;
         [strongSelf updateTitleLabel];
     }];
+    [self updateTitleLabel];
+    [self initData];
     //读取服务
     self.bluetooth.channel(channelOnCharacteristicView).characteristicDetails(self.peripheral, self.characteristic);
-    [self updateTitleLabel];
-    
-    [self initData];
 }
 
 #pragma mark - actions
@@ -148,7 +147,7 @@
             }];
         }
         if (self.characteristic.properties & (CBCharacteristicPropertyNotify | CBCharacteristicPropertyIndicate)) {
-            property.rightTitle = @"订阅通知";
+            property.rightTitle = self.characteristic.isNotifying ? @"取消订阅通知" : @"订阅通知";
             [property setRightAction:^(ATPropertyModel *property) {
                 __strong typeof(weakSelf) strongSelf = weakSelf;
                 if (strongSelf.peripheral.state != CBPeripheralStateConnected) {
@@ -164,6 +163,8 @@
                     }];
                 }
             }];
+            // 默认订阅通知
+            property.rightAction(property);
             // 监听通知状态
             [self.bluetooth setBlockOnDidUpdateNotificationStateForCharacteristicAtChannel:channelOnCharacteristicView block:^(CBCharacteristic *characteristic, NSError *error) {
                 ATLog(@"uid:%@, isNotifying:%@",characteristic.UUID, characteristic.isNotifying ? @"on" : @"off");
