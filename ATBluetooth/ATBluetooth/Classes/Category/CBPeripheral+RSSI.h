@@ -7,9 +7,19 @@
 //
 
 #import <CoreBluetooth/CoreBluetooth.h>
+#import "WcBpMessage.h"
 
 @interface CBPeripheral (RSSI)
-@property (nonatomic, assign) NSNumber *exRSSI;
+@property (nonatomic, strong) NSNumber *exRSSI;
 @property (nonatomic, strong) NSDictionary *exAdvertisementData;
+@end
 
+@interface CBService (Wechat)
+@property (nonatomic, assign) NSNumber *supportProbuf;
+@property (nonatomic, strong) CBCharacteristic *charateristicWrite;
+@property (nonatomic, strong) CBCharacteristic *charateristicRead;
+@property (nonatomic, strong) CBCharacteristic *charateristicIndicate;
+@property (nonatomic, strong) WcBpMessage *message;
+
+- (void)updateWechatIfNeed;
 @end

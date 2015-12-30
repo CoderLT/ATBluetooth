@@ -11,6 +11,7 @@
 #import "ATBTData.h"
 
 @interface ATPropertyModel : NSObject
+@property (nonatomic, weak) CBCharacteristic *characteristic;
 @property (nonatomic, assign) CBCharacteristicProperties property;
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, copy) NSString *leftTitle;

@@ -7,8 +7,12 @@
 //
 
 #import "ATBTData.h"
+#import "WcBpMessage.h"
 
+@interface ATBTData ()
+@end
 @implementation ATBTData
+
 + (instancetype)dataWithValue:(NSData *)value encoding:(ATDataEncoding)encoding {
     return [self dataWithValue:value date:nil encoding:encoding];
 }
@@ -18,6 +22,7 @@
     data.value = value;
     data.encoding = encoding;
     switch (encoding) {
+        case ATDataProtobuf:
         case ATDataEncodingHex: {
             NSMutableString *content = [NSMutableString string];
             for (int i = 0; i < value.length; i++) {
@@ -33,10 +38,6 @@
         case ATDataEncodingGB18030: {
             NSStringEncoding encoding = CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingGB_18030_2000);
             data.text = [[NSString alloc] initWithData:value encoding:encoding];
-            break;
-        }
-        case ATDataProtobuf: {
-            
             break;
         }
     }

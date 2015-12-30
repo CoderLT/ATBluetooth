@@ -80,6 +80,12 @@
     [self.bluetooth setBlockOnDiscoverCharacteristicsAtChannel:channelOnPeropheralView block:^(CBPeripheral *peripheral, CBService *service, NSError *error) {
         ATLog(@"发现特征%@: %@", service.UUID, [service.characteristics valueForKeyPath:@"UUID.UUIDString"]);
         __strong typeof(weakSelf) strongSelf = weakSelf;
+        [service updateWechatIfNeed];
+        for (CBCharacteristic *characteristics in service.characteristics) {
+            if (characteristics.properties & CBCharacteristicPropertyRead) {
+                [peripheral readValueForCharacteristic:characteristics];
+            }
+        }
         [strongSelf.tableView reloadData];
     }];
     // 设置读取characteristics的委托
@@ -95,6 +101,11 @@
     [self.bluetooth setBlockOnDiscoverDescriptorsForCharacteristicAtChannel:channelOnPeropheralView block:^(CBPeripheral *peripheral, CBCharacteristic *characteristic, NSError *error) {
         ATLog(@"发现描述%@:%@", characteristic.UUID, [characteristic.descriptors valueForKeyPath:@"UUID.UUIDString"]);
         __strong typeof(weakSelf) strongSelf = weakSelf;
+        if (!characteristic.service.supportProbuf) {
+            for (CBDescriptor *descriptor in characteristic.descriptors) {
+                [peripheral readValueForDescriptor:descriptor];
+            }
+        }
         [strongSelf.tableView reloadData];
     }];
     // 设置读取Descriptor的委托
@@ -124,7 +135,7 @@
         reconnect = YES;
     }
     if (reconnect) {
-        self.bluetooth.having(self.peripheral).and.channel(channelOnPeropheralView).then.connectToPeripherals().discoverServices().discoverCharacteristics().readValueForCharacteristic().begin();
+        self.bluetooth.having(self.peripheral).and.channel(channelOnPeropheralView).then.connectToPeripherals().discoverServices().discoverCharacteristics().discoverDescriptorsForCharacteristic().begin();
     }
     else {
         [self.tableView reloadData];
@@ -199,8 +210,9 @@
     return cell;
 }
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    NSString *desc = [[ATGATTTool shareInstance] serviceDesc:self.peripheral.services[section]];
-    return [NSString stringWithFormat:@"%@ : %@", desc ?: @"SERVICE UUID", self.peripheral.services[section].UUID.UUIDString];
+    CBService *service = self.peripheral.services[section];
+    NSString *desc = [[ATGATTTool shareInstance] serviceDesc:service];
+    return [NSString stringWithFormat:@"%@ : %@", desc ?: (service.supportProbuf ? @"微信智能硬件" : @"SERVICE UUID"), service.UUID.UUIDString];
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [self.navigationController pushViewController:[ATCharacteristicController vcWithBluetooth:self.bluetooth

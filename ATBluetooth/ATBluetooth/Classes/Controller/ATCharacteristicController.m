@@ -51,7 +51,14 @@
         [strongSelf updateTitleLabel];
     }];
     [self updateTitleLabel];
-    [self initData];
+    if (self.characteristic.service.supportProbuf) {
+        [self initData:self.characteristic.service.charateristicWrite];
+        [self initData:self.characteristic.service.charateristicIndicate];
+        [self initData:self.characteristic.service.charateristicRead];
+    }
+    else {
+        [self initData:self.characteristic];
+    }
     //读取服务
     self.bluetooth.channel(channelOnCharacteristicView).characteristicDetails(self.peripheral, self.characteristic);
 }
@@ -79,11 +86,12 @@
     }]];
     [self.navigationController presentViewController:alert animated:YES completion:nil];
 }
-- (void)initData {
-    if (self.characteristic.properties & CBCharacteristicPropertyWriteWithoutResponse) {
+- (void)initData:(CBCharacteristic *)characteristic {
+    if (characteristic.properties & CBCharacteristicPropertyWriteWithoutResponse) {
         ATPropertyModel *property = [[ATPropertyModel alloc] init];
+        property.characteristic = characteristic;
         property.property = CBCharacteristicPropertyWriteWithoutResponse;
-        property.title = @"写无回复";
+        property.title = [NSString stringWithFormat:@"%@:写无回复", characteristic.UUID];
         property.rightTitle = @"写数据";
         __weak typeof(self) weakSelf = self;
         [property setRightAction:^(ATPropertyModel *property) {
@@ -100,10 +108,11 @@
         }];
         [self.propertys addObject:property];
     }
-    if (self.characteristic.properties & CBCharacteristicPropertyWrite) {
+    if (characteristic.properties & CBCharacteristicPropertyWrite) {
         ATPropertyModel *property = [[ATPropertyModel alloc] init];
+        property.characteristic = characteristic;
         property.property = CBCharacteristicPropertyWrite;
-        property.title = @"写";
+        property.title = [NSString stringWithFormat:@"%@:写", characteristic.UUID];
         property.rightTitle = @"写数据";
         __weak typeof(self) weakSelf = self;
         [property setRightAction:^(ATPropertyModel *property) {
@@ -125,46 +134,49 @@
             [SVProgressHUD showInfoWithStatus:@"写成功"];
         }];
     }
-    if (self.characteristic.properties & (CBCharacteristicPropertyRead | CBCharacteristicPropertyNotify | CBCharacteristicPropertyIndicate)) {
+    if (characteristic.properties & (CBCharacteristicPropertyRead | CBCharacteristicPropertyNotify | CBCharacteristicPropertyIndicate)) {
         ATPropertyModel *property = [[ATPropertyModel alloc] init];
-        property.property = (self.characteristic.properties & (CBCharacteristicPropertyRead | CBCharacteristicPropertyNotify | CBCharacteristicPropertyIndicate));
-        property.title = [ATBlueoothTool properties:property.property separator:@"&"];
+        property.characteristic = characteristic;
+        property.property = (characteristic.properties & (CBCharacteristicPropertyRead | CBCharacteristicPropertyNotify | CBCharacteristicPropertyIndicate));
+        property.title = [NSString stringWithFormat:@"%@:%@", characteristic.UUID, [ATBlueoothTool properties:property.property separator:@"&"]];
         
         __weak typeof(self) weakSelf = self;
         __weak typeof(property) weakProperty = property;
-        if (self.characteristic.properties & CBCharacteristicPropertyRead) {
+        if (characteristic.properties & CBCharacteristicPropertyRead) {
             property.leftTitle = @"读取数据";
             [property setLeftAction:^(ATPropertyModel *property) {
                 __strong typeof(weakSelf) strongSelf = weakSelf;
                 strongSelf.bluetooth.readValueForCharacteristic();
-                [strongSelf.peripheral readValueForCharacteristic:strongSelf.characteristic];
+                [strongSelf.peripheral readValueForCharacteristic:characteristic];
             }];
             // 监听读取数据
             [self.bluetooth setBlockOnReadValueForCharacteristicAtChannel:channelOnCharacteristicView block:^(CBPeripheral *peripheral, CBCharacteristic *characteristics, NSError *error) {
                 __strong typeof(weakSelf) strongSelf = weakSelf;
                 __strong typeof(weakProperty) strongProperty = weakProperty;
-                [strongSelf read:characteristics.value property:strongProperty];
+                [strongSelf read:characteristics.value property:strongProperty notify:NO];
             }];
         }
-        if (self.characteristic.properties & (CBCharacteristicPropertyNotify | CBCharacteristicPropertyIndicate)) {
-            property.rightTitle = self.characteristic.isNotifying ? @"取消订阅通知" : @"订阅通知";
+        if (characteristic.properties & (CBCharacteristicPropertyNotify | CBCharacteristicPropertyIndicate)) {
+            property.rightTitle = characteristic.isNotifying ? @"取消订阅通知" : @"订阅通知";
             [property setRightAction:^(ATPropertyModel *property) {
                 __strong typeof(weakSelf) strongSelf = weakSelf;
                 if (strongSelf.peripheral.state != CBPeripheralStateConnected) {
                     [SVProgressHUD showErrorWithStatus:@"peripheral已经断开连接，请重新连接"];
                     return;
                 }
-                if (strongSelf.characteristic.isNotifying) {
-                    [strongSelf.bluetooth cancelNotify:strongSelf.peripheral characteristic:strongSelf.characteristic];
+                if (characteristic.isNotifying) {
+                    [strongSelf.bluetooth cancelNotify:strongSelf.peripheral characteristic:characteristic];
                 } else {
-                    [strongSelf.bluetooth notify:strongSelf.peripheral characteristic:strongSelf.characteristic block:^(CBPeripheral *peripheral, CBCharacteristic *characteristics, NSError *error) {
+                    [strongSelf.bluetooth notify:strongSelf.peripheral characteristic:characteristic block:^(CBPeripheral *peripheral, CBCharacteristic *characteristics, NSError *error) {
                         __strong typeof(weakSelf) strongSelf = weakSelf;
-                        [strongSelf read:characteristics.value property:property];
+                        [strongSelf read:characteristics.value property:property notify:YES];
                     }];
                 }
             }];
             // 默认订阅通知
-            property.rightAction(property);
+            if (!characteristic.isNotifying) {
+                property.rightAction(property);
+            }
             // 监听通知状态
             [self.bluetooth setBlockOnDidUpdateNotificationStateForCharacteristicAtChannel:channelOnCharacteristicView block:^(CBCharacteristic *characteristic, NSError *error) {
                 ATLog(@"uid:%@, isNotifying:%@",characteristic.UUID, characteristic.isNotifying ? @"on" : @"off");
@@ -175,34 +187,39 @@
         }
         [self.propertys addObject:property];
     }
-    if (self.characteristic.properties & CBCharacteristicPropertyBroadcast) {
+    if (characteristic.properties & CBCharacteristicPropertyBroadcast) {
         ATPropertyModel *property = [[ATPropertyModel alloc] init];
+        property.characteristic = characteristic;
         property.property = CBCharacteristicPropertyBroadcast;
-        property.title = @"广播";
+        property.title = [NSString stringWithFormat:@"%@:广播", characteristic.UUID];
         [self.propertys addObject:property];
     }
-    if (self.characteristic.properties & CBCharacteristicPropertyAuthenticatedSignedWrites) {
+    if (characteristic.properties & CBCharacteristicPropertyAuthenticatedSignedWrites) {
         ATPropertyModel *property = [[ATPropertyModel alloc] init];
+        property.characteristic = characteristic;
         property.property = CBCharacteristicPropertyAuthenticatedSignedWrites;
-        property.title = @"验证的";
+        property.title = [NSString stringWithFormat:@"%@:验证的", characteristic.UUID];
         [self.propertys addObject:property];
     }
-    if (self.characteristic.properties & CBCharacteristicPropertyExtendedProperties) {
+    if (characteristic.properties & CBCharacteristicPropertyExtendedProperties) {
         ATPropertyModel *property = [[ATPropertyModel alloc] init];
+        property.characteristic = characteristic;
         property.property = CBCharacteristicPropertyExtendedProperties;
-        property.title = @"拓展";
+        property.title = [NSString stringWithFormat:@"%@:拓展", characteristic.UUID];
         [self.propertys addObject:property];
     }
-    if (self.characteristic.properties & CBCharacteristicPropertyNotifyEncryptionRequired) {
+    if (characteristic.properties & CBCharacteristicPropertyNotifyEncryptionRequired) {
         ATPropertyModel *property = [[ATPropertyModel alloc] init];
+        property.characteristic = characteristic;
         property.property = CBCharacteristicPropertyNotifyEncryptionRequired;
-        property.title = @"加密通知";
+        property.title = [NSString stringWithFormat:@"%@:加密通知", characteristic.UUID];
         [self.propertys addObject:property];
     }
-    if (self.characteristic.properties & CBCharacteristicPropertyIndicateEncryptionRequired) {
+    if (characteristic.properties & CBCharacteristicPropertyIndicateEncryptionRequired) {
         ATPropertyModel *property = [[ATPropertyModel alloc] init];
+        property.characteristic = characteristic;
         property.property = CBCharacteristicPropertyIndicateEncryptionRequired;
-        property.title = @"加密声明";
+        property.title = [NSString stringWithFormat:@"%@:加密声明", characteristic.UUID];
         [self.propertys addObject:property];
     }
     [self.tableView reloadData];
@@ -241,16 +258,86 @@
     }
     self.tableView.tableHeaderView = self.tableView.tableHeaderView;
 }
-- (void)read:(NSData *)data property:(ATPropertyModel *)property {
+- (void)read:(NSData *)data property:(ATPropertyModel *)property notify:(BOOL)notify {
     if (data.length <= 0) {
         return;
     }
-    ATBTDataR *logData = [ATBTDataR dataWithValue:data encoding:self.enCoding];
-    [property.dataList insertObject:logData atIndex:0];
-    if (property.dataList.count > 5) {
-        [property.dataList removeLastObject];
+    ATBTData *logData = [ATBTDataR dataWithValue:data encoding:self.enCoding];
+    WcBpMessage *responseMessage;
+    if (notify && self.characteristic.service.supportProbuf) {
+        WcBpMessage *message = self.characteristic.service.message;
+        NSData *data_p;
+        [message recieveData:data];
+        if (WcBpMessageStateFinish == message.state) {
+            switch (message.nCmdId) {
+                case MmBp_EmCmdId_EciReqAuth: {
+                    responseMessage = [WcBpMessage authResponse:nil];
+                    responseMessage.nSeq = message.nSeq;
+                    break;
+                }
+                case MmBp_EmCmdId_EciReqInit: {
+                    responseMessage = [WcBpMessage initResponse];
+                    responseMessage.nSeq = message.nSeq;
+                    break;
+                }
+                case MmBp_EmCmdId_EciReqSendData:
+                    data_p = ((MmBp_SendDataRequest *)message.gpbMessage).data_p;
+                    break;
+                case MmBp_EmCmdId_EciNone:
+                case MmBp_EmCmdId_EciRespSendData:
+                case MmBp_EmCmdId_EciPushRecvData:
+                case MmBp_EmCmdId_EciRespAuth:
+                case MmBp_EmCmdId_EciRespInit:
+                case MmBp_EmCmdId_EciPushSwitchView:
+                case MmBp_EmCmdId_EciPushSwitchBackgroud:
+                case MmBp_EmCmdId_EciErrDecode:
+                default:
+                    break;
+            }
+            message.state = WcBpMessageStateStandby;
+            
+            if (message.nLength > 20) {
+                [property.dataList removeObjectsInRange:NSMakeRange(0, ((message.nLength+19)/20)-1)];
+            }
+            [self.logs addObject:logData];
+            
+            NSString *cmdName = [MmBp_EmCmdId_EnumDescriptor() textFormatNameForValue:message.nCmdId];
+            if (data_p) {
+                logData = [ATBTDataR dataWithText:[NSString stringWithFormat:@"%@:%@",
+                                                   cmdName?:@(responseMessage.nCmdId),
+                                                   [ATBTDataR dataWithValue:data_p encoding:ATDataEncodingHex].text]];
+                [self.logs addObject:[ATBTDataR dataWithText:[NSString stringWithFormat:@"%@\r\n<%@>",
+                                                              logData.text,
+                                                              [ATBTDataR dataWithValue:message.data encoding:ATDataEncodingHex].text]]];
+            }
+            else {
+                logData = [ATBTDataR dataWithText:[NSString stringWithFormat:@"%@", cmdName?:@(responseMessage.nCmdId)]];
+            }
+        }
+        [property.dataList insertObject:logData atIndex:0];
+        if (property.dataList.count > 10) {
+            [property.dataList removeLastObject];
+        }
+        [self.logs addObject:logData];
     }
-    [self.logs addObject:logData];
+    else {
+        [property.dataList insertObject:logData atIndex:0];
+        if (property.dataList.count > 10) {
+            [property.dataList removeLastObject];
+        }
+        [self.logs addObject:logData];
+    }
+    // 回复消息
+    if (responseMessage) {
+        NSString *cmdName = [MmBp_EmCmdId_EnumDescriptor() textFormatNameForValue:responseMessage.nCmdId];
+        [self.logs addObject:[ATBTDataW dataWithText:[NSString stringWithFormat:@"%@\r\n<%@>",
+                                                      cmdName?:@(responseMessage.nCmdId),
+                                                      [ATBTDataW dataWithValue:responseMessage.data encoding:ATDataEncodingHex].text]]];
+        [self writeValue:responseMessage.data
+       forCharacteristic:self.characteristic.service.charateristicWrite
+                    type:((self.characteristic.service.charateristicWrite.properties & CBCharacteristicPropertyWrite)
+                          ? CBCharacteristicWriteWithResponse : CBCharacteristicWriteWithoutResponse)];
+    }
     [self.tableView reloadData];
 }
 - (void)send:(NSString *)content property:(ATPropertyModel *)property {
@@ -268,18 +355,20 @@
                 return;
             }
             NSMutableString *logContent = [NSMutableString string];
-            char *myBuffer = (char *)malloc((int)[content length] / 2 + 1);
-            bzero(myBuffer, [content length] / 2 + 1);
-            for (int i = 0; i < (int)([content length] - 1); i += 2) {
+            NSUInteger length = ([content length] + 1) / 2;
+            char *myBuffer = (char *)malloc(length);
+            bzero(myBuffer, length);
+            for (int i = 0; i < length; i++) {
                 unsigned int anInt;
-                NSString * hexCharStr = [content substringWithRange:NSMakeRange(i, 2)];
+                NSString * hexCharStr = [content substringWithRange:NSMakeRange(i*2, MIN(content.length - i*2, 2))];
                 NSScanner * scanner = [[NSScanner alloc] initWithString:hexCharStr];
                 [scanner scanHexInt:&anInt];
-                myBuffer[i / 2] = (char)anInt;
+                myBuffer[i] = (char)anInt;
                 [logContent appendFormat:@"%@%@", logContent.length ? @" " : @"", hexCharStr];
             }
-            data = [NSData dataWithBytes:myBuffer length:sizeof([content length] / 2 + 1)];
+            data = [NSData dataWithBytes:myBuffer length:length];
             logData = [ATBTDataW dataWithText:logContent];
+            free(myBuffer);
             break;
         }
         case ATDataEncodingUTF8: {
@@ -299,22 +388,42 @@
         }
     }
     
-    [property.dataList insertObject:logData atIndex:0];
-    if (property.dataList.count > 5) {
-        [property.dataList removeLastObject];
-    }
-    [self.logs addObject:logData];
+    if (self.characteristic.service.supportProbuf) {
+        WcBpMessage *pushData = [WcBpMessage pushData:data];
+        data = pushData.data;
 
+        [property.dataList insertObject:logData atIndex:0];
+        if (property.dataList.count > 5) {
+            [property.dataList removeLastObject];
+        }
+        NSString *cmdName = [MmBp_EmCmdId_EnumDescriptor() textFormatNameForValue:pushData.nCmdId];
+        [self.logs addObject:[ATBTDataW dataWithText:[NSString stringWithFormat:@"%@:%@\r\n<%@>",
+                                                      cmdName?:@(pushData.nCmdId), logData.text,
+                                                      [ATBTDataW dataWithValue:data encoding:ATDataEncodingHex].text]]];
+    }
+    else {
+        [property.dataList insertObject:logData atIndex:0];
+        if (property.dataList.count > 5) {
+            [property.dataList removeLastObject];
+        }
+        [self.logs addObject:logData];
+    }
+    
+    [self writeValue:data
+   forCharacteristic:property.characteristic
+                type:property.property == CBCharacteristicPropertyWrite ? CBCharacteristicWriteWithResponse : CBCharacteristicWriteWithoutResponse];
+    
+    [self.tableView reloadData];
+}
+- (void)writeValue:(NSData *)data forCharacteristic:(CBCharacteristic *)characteristic type:(CBCharacteristicWriteType)type {
     NSInteger start = 0;
     while (start < data.length) {
         NSUInteger bufCount = MIN(20, data.length - start);
         [self.peripheral writeValue:[data subdataWithRange:NSMakeRange(start, bufCount)]
-                  forCharacteristic:self.characteristic
-                               type:property.property == CBCharacteristicPropertyWrite ? CBCharacteristicWriteWithResponse : CBCharacteristicWriteWithoutResponse];
+                  forCharacteristic:characteristic
+                               type:type];
         start += bufCount;
     }
-    
-    [self.tableView reloadData];
 }
 #pragma mark - delegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {

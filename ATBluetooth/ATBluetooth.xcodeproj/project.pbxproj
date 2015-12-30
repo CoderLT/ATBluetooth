@@ -15,6 +15,7 @@
 		558C0B521C2D4A3E000E5024 /* ATSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 558C0B511C2D4A3E000E5024 /* ATSettingController.m */; };
 		558C0B571C301ED0000E5024 /* ATGATTTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 558C0B551C301ED0000E5024 /* ATGATTTool.m */; };
 		558C0B581C301ED0000E5024 /* GATT_Specifications.plist in Resources */ = {isa = PBXBuildFile; fileRef = 558C0B561C301ED0000E5024 /* GATT_Specifications.plist */; };
+		558C0B5E1C311CCD000E5024 /* WcBpMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 558C0B5D1C311CCD000E5024 /* WcBpMessage.m */; };
 		55BBBF641C28F631005E6E8A /* ATTextInputController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55BBBF631C28F631005E6E8A /* ATTextInputController.m */; };
 		55BBBF671C2905AF005E6E8A /* ATBTData.m in Sources */ = {isa = PBXBuildFile; fileRef = 55BBBF661C2905AF005E6E8A /* ATBTData.m */; };
 		55BBBF6C1C291AE2005E6E8A /* UIView+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 55BBBF691C291AE2005E6E8A /* UIView+Common.m */; };
@@ -79,6 +80,8 @@
 		558C0B541C301ED0000E5024 /* ATGATTTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATGATTTool.h; sourceTree = "<group>"; };
 		558C0B551C301ED0000E5024 /* ATGATTTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATGATTTool.m; sourceTree = "<group>"; };
 		558C0B561C301ED0000E5024 /* GATT_Specifications.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = GATT_Specifications.plist; sourceTree = "<group>"; };
+		558C0B5C1C311CCD000E5024 /* WcBpMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WcBpMessage.h; sourceTree = "<group>"; };
+		558C0B5D1C311CCD000E5024 /* WcBpMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WcBpMessage.m; sourceTree = "<group>"; };
 		55BBBF621C28F631005E6E8A /* ATTextInputController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATTextInputController.h; sourceTree = "<group>"; };
 		55BBBF631C28F631005E6E8A /* ATTextInputController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATTextInputController.m; sourceTree = "<group>"; };
 		55BBBF651C2905AF005E6E8A /* ATBTData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATBTData.h; sourceTree = "<group>"; };
@@ -197,6 +200,8 @@
 				55155DE81C1D54ED00BC519A /* Wcprotobuf.pbobjc.h */,
 				55155DE91C1D54ED00BC519A /* Wcprotobuf.pbobjc.m */,
 				55155DEA1C1D54ED00BC519A /* WCProtobuf.proto */,
+				558C0B5C1C311CCD000E5024 /* WcBpMessage.h */,
+				558C0B5D1C311CCD000E5024 /* WcBpMessage.m */,
 			);
 			path = WeChatProtobuf;
 			sourceTree = "<group>";
@@ -600,6 +605,7 @@
 				55E3B9C51BFDCFA500606F0C /* ATHomeController.m in Sources */,
 				55BBBF6C1C291AE2005E6E8A /* UIView+Common.m in Sources */,
 				55E3B9CE1BFE089500606F0C /* ATPeripheralController.m in Sources */,
+				558C0B5E1C311CCD000E5024 /* WcBpMessage.m in Sources */,
 				55E3B1381C29621F00472D0D /* DOKeyItem.m in Sources */,
 				558C0B521C2D4A3E000E5024 /* ATSettingController.m in Sources */,
 				55E3B9C61BFDCFA500606F0C /* AppDelegate.m in Sources */,
