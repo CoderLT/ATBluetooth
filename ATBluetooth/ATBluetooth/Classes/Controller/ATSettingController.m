@@ -58,7 +58,7 @@
         default:
             break;
     }
-    NSLog(@"%@", indexPath);
+    ATLog(@"%@", indexPath);
 }
 
 #pragma mark - 在应用内发送邮件
@@ -136,6 +136,7 @@
                 msg = @"";
                 break;
         }
+        ATLog(@"%@", msg);
     }];
 }
 
