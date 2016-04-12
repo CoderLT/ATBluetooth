@@ -769,7 +769,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.coderlt.bluetooth;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "bb4a87fe-1bba-4884-8b12-28770fb332fc";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -785,7 +785,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.coderlt.bluetooth;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "bb4a87fe-1bba-4884-8b12-28770fb332fc";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

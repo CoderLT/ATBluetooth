@@ -131,7 +131,7 @@
     initRes.timeString = [NSString stringWithFormat:@"%04d%02d%02d%02d%02d%02d%01d", tm->tm_year+1900, tm->tm_mon+1, tm->tm_mday, tm->tm_hour, tm->tm_min, tm->tm_sec, tm->tm_wday?:7];
     
     WcBpMessage *respInit = [[WcBpMessage alloc] init];
-    respInit.nCmdId = MmBp_EmCmdId_EciRespAuth;
+    respInit.nCmdId = MmBp_EmCmdId_EciRespInit;
     respInit.nLength = initRes.data.length + 8;
     respInit.gpbMessage = initRes;
     [respInit.body appendData:initRes.data];
